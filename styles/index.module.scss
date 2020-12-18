@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap');
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.title {
+  font-size: 4rem;
+  margin: 7rem 1.25rem 2.5rem 1.25rem;
+}
+
+.btn {
+  &.primaryBtn {
+    background-color: #fff;
+  }
+}
+
+@keyframes animateWave {
+  0% {
+    transform: scale(1,0);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+.waveContainer {
+  background: #09F;
+  color: #FFF;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+
+  > svg {
+    display: block;
+    transform-origin: bottom;
+    animation: animateWave 1000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+}

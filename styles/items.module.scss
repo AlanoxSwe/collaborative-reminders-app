@@ -1,0 +1,20 @@
+.items {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.item {
+  background-color: #eee;
+  margin: 0.5rem;
+  padding: 1rem;
+
+  .title {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  .desc {
+    padding-top: 1rem;
+  }
+}
