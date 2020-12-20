@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 
 import TodoContainer from '@/containers/TodoContainer';
 import Items from '@/components/Items';
+import Header from '@/components/common/Header';
+
 import db from '@/util/db';
 
 export default function Todo () {
@@ -15,6 +17,7 @@ export default function Todo () {
 
   return (
     <>
+      <Header />
       <TodoContainer 
         type='text'
         room={`${todoId}`}
