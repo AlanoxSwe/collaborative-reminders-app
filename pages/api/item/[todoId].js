@@ -12,6 +12,7 @@ export default async (req, res) => {
         .updateOne({ id: todoId },
           { $push: { items: object } }
         );
+      res.status(201).end();
       break;
     default:
       res.setHeader('Allow', ['POST'])

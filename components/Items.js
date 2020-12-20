@@ -5,7 +5,7 @@ import Item from '@/components/Item';
 import styles from '@/styles/items.module.scss';
 
 export default function Items ({ todoId }) {
-  const { data } = useSWR(`/api/todo/${todoId}`);
+  const { data } = useSWR(todoId && `/api/todo/${todoId}`);
 
   return (
     <div className={styles.items}>

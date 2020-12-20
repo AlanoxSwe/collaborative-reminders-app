@@ -9,7 +9,8 @@ export default async (req, res) => {
       const todo = await db
         .collection("todos")
         .findOne({ id: todoId });
-      res.status(200).json(todo);
+      if(todo) return res.status(200).json(todo);
+      res.status(404).end();
       break;
     default:
       res.setHeader('Allow', ['GET'])
