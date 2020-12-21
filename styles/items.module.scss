@@ -12,7 +12,6 @@
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   
   .item {
-    // padding-bottom: 0;
     border: 2px #eee solid;
     box-shadow: none;
   }
@@ -49,8 +48,17 @@
   width: 20px;
   height: 20px;
   margin: 0 1rem;
-  border: solid 1px #000;
+  border: solid 1px #09f;
   display: inline-block;
+  border-radius: 5px;
+
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  
+  &:hover {
+    box-shadow: 0px 15px 20px rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+  }
 }
 
 .checkbox input[type="checkbox"] {
@@ -61,3 +69,10 @@
   border: solid 1px #09f;
   background-color: #09f;
 }
+
+.form {
+  background-color: #eee;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 5px;
+} 

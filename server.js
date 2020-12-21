@@ -64,7 +64,7 @@ io.on('connection', function (socket) {
     console.log('User "%s" joins room "%s"', socket.id, room)
     socket.join(room)
     getInstanceOfY(room).then(function (y) {
-      global.y = y // TODO: remove !!!
+      global.y = y
       if (rooms.indexOf(room) === -1) {
         y.connector.userJoined(socket.id, 'slave')
         rooms.push(room)

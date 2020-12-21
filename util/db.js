@@ -45,14 +45,16 @@ const addBaseItem = async (todoId, titleRef, descRef) => {
 }
 
 const addItem = async (itemId, titleRef, descRef) => {
-  await Axios.post(`/api/item/${itemId}`, {
-    id: uuid.generate()[1],
-    name: 'this is name',
-    desc: 'this is desc',
-    baseParent: true,
-    completed: Number(0),
-    items: [],
-  });
+  if(titleRef.current.value) {
+    await Axios.post(`/api/item/${itemId}`, {
+      id: uuid.generate()[1],
+      name: titleRef.current.value,
+      desc: descRef ? descRef.current.value : null,
+      baseParent: false,
+      completed: Number(0),
+      items: [],
+    });
+  }
 }
 
 const deleteItem = async (itemId) => {

@@ -9,8 +9,8 @@ import yWebsocketsClient from 'y-websockets-client';
 Y.extend(yArray, yWebsocketsClient, yMemory, yArray, yText);
 
 var io = Y['websockets-client'].io;
-var link = 'http://localhost:1234';
-// var link = 'http://192.168.0.47:1234';
+// var link = 'http://localhost:1234';
+var link = 'http://192.168.50.24:1234';
 
 var connection = io(link);
 
