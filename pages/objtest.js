@@ -12,6 +12,9 @@ const ObjTest = () => {
         baseParent: true,
         items: [
           {
+            id: 'ttt'
+          },
+          {
             id: '6sznBnkA28uP4yaQJbbTb',
             name: 'lmoa',
             desc: 'agario',
@@ -33,20 +36,40 @@ const ObjTest = () => {
     ]
   }
 
-  const myId = "6sznBnkA28uP4yaQJyUreT";
-  const myIdParent = "6sznBnkA28uP4yaQJbbTb";
+  // const todo = obj.items.find(e => e.id === '6sznBnkA28kP4yaQJNwh9T');
 
-  const todo = obj.items.find(e => e.id === '6sznBnkA28kP4yaQJNwh9T');
+  // const string = "6sznBnkA28uP4yaQJbbTb.6sznBnkA28uP4yaQJyUreT";
+
+  // const ids = string.split(".");
+
+  // let arr = todo.items;
+  // let pos = [];
+
+  // for (let i = 0; i < ids.length; i++) {
+  //   let res = arr.find((e, index) => {
+  //     if(e.id === ids[i]) pos.push(index); //THIS right here!
+  //     return e.id === ids[i]
+  //   });
+  //   if(res) arr = res.items
+  // }
+  // console.log(pos);
+
+  const text = 'abcdef'
+  const editedText = text.slice(text.length-3) //'abcde'
+
+  // let res = arr.find(e => e.id === ids[1]);
+  // console.log(res.items);
+
+  // ids.forEach(e => items.items.find(m => m.id === e));
+
   
-  const items = todo.items.filter(e => e.items.length);
-
-  console.log(items)
+  // console.log(tesy)
 
 
 
 
   return <div>
-    {obj.id}
+    {editedText}
   </div>
 }
 

@@ -1,5 +1,5 @@
 .header {
-
+  height: 100px;
   .logo,
   .menu {
     min-height: 100px;
@@ -8,7 +8,7 @@
   
   .logo {
     background: #09f;
-    width: calc(30% - 28px);
+    width: calc(30%);
     float: left;
     display: flex;
     align-items: center;
@@ -25,8 +25,8 @@
   }
   
   .menu {
-    background: #eee;
-    width: calc(70% - 28px);
+    background: #fff;
+    width: calc(70%);
     float: right;
     display: flex;
     align-items: center;
@@ -61,7 +61,7 @@
   
   .menu:before {
     right: 100%;
-    border-bottom: 100px solid #eee;
+    border-bottom: 100px solid #fff;
     border-left: 50px solid transparent;
   }
 }

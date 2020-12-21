@@ -7,6 +7,9 @@ import Header from '@/components/common/Header';
 
 import db from '@/util/db';
 
+import styles from '@/styles/list.module.scss';
+import Button from '@/components/common/Button';
+
 export default function Todo () {
   const [connectionExists, setConnectionExists] = useState(true);
   const textInput = useRef();
@@ -18,23 +21,28 @@ export default function Todo () {
   return (
     <>
       <Header />
-      <TodoContainer 
-        type='text'
-        room={`${todoId}`}
-        connectionExists={connectionExists}
-        ref={textInput}
-      />
+      <div className={styles.container}>
+        <h1 className={styles.title}>{todoId}</h1>
+        <form className={styles.form}>
+          <TodoContainer 
+            type='text'
+            room={`${todoId}`}
+            connectionExists={connectionExists}
+            ref={textInput}
+            className={styles.textField}
+          />
+          <TodoContainer 
+            type='textarea'
+            room={`${todoId}-desc`}
+            connectionExists={connectionExists}
+            ref={descInput}
+            className={styles.textField}
+          />
+          <Button type="secondary" text="Add" className={styles.button} onClick={() => db.addBaseItem(todoId, textInput, descInput)} />
+        </form>
 
-      <TodoContainer 
-        type='textarea'
-        room={`${todoId}-desc`}
-        connectionExists={connectionExists}
-        ref={descInput}
-      />
-
-      <button onClick={() => db.addItem(todoId, textInput, descInput)}>Add</button>
-
-      <Items todoId={todoId} />
+        <Items todoId={todoId} />
+      </div>
     </>
   );
 }

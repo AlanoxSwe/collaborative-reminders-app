@@ -1,9 +1,9 @@
 import styles from '@/styles/button.module.scss';
 
-const Button = ({ type, text, ...props }) => {
+const Button = ({ type, size, text, className, ...props }) => {
 
   return ( 
-    <button className={`${styles.btn} ${styles[type]}`} {...props}>{text}</button>
+    <button className={`${styles.btn} ${styles[type]} ${size && styles[size]} ${className}`} {...props}>{text}</button>
   )
 }
 

@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
         shouldRetryOnError: false,
         fetcher: (...args) => Axios(...args).then((res) => res.data),
         revalidateOnFocus: true,
-        refreshInterval: 700,
+        refreshInterval: 500,
       }}
     >
       <Component {...pageProps} />

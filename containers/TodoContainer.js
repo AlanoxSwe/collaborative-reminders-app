@@ -9,7 +9,7 @@ const TodoContainer = React.forwardRef(({ type, connectionExists, room, ...props
     ? (
       <input type="text"
         id={room}
-        placeholder={`${room}...`}
+        placeholder="Title..."
         ref={textInput}
         {...props}
       />
@@ -17,21 +17,21 @@ const TodoContainer = React.forwardRef(({ type, connectionExists, room, ...props
     : (
       <textarea
         id={room}
-        placeholder={`${room}...`}
+        placeholder="Description..."
         ref={textInput}
         {...props}
       />
     );
   
   return (
-    <div>
+    <>
       <Yjs
         room={room}
         connectionExists={connectionExists}
         textInput={textInput}
       />
       {inputArea}
-    </div>
+    </>
   );
 });
 
