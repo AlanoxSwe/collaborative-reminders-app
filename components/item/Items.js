@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 
-import ItemsList from '@/components/ItemsList';
+import ItemsList from '@/components/item/ItemsList';
 
 import styles from '@/styles/items.module.scss';
 

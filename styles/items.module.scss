@@ -19,15 +19,21 @@
   .itemHeader {
     display: flex;
     justify-content: space-between;
+
+    .buttons {
+      button {
+        margin: 0 0.5rem;
+      } 
+    }
   }
 
   .title {
     font-weight: 600;
     font-size: 1.3rem;
-    cursor: pointer;
   }
 
   .desc {
+    text-align: left;
     padding-top: 1rem;
     margin-left: 1rem;
   }
@@ -35,16 +41,17 @@
   &.completed {
     text-decoration: line-through;
   }
+
 }
 
 .checkbox {
   user-select: none;
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
 .checkbox .square {
+  cursor: pointer;
   width: 20px;
   height: 20px;
   margin: 0 1rem;

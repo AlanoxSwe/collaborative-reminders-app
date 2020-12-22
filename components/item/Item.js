@@ -2,29 +2,37 @@ import Form from '@/containers/Form';
 import styles from '@/styles/items.module.scss';
 import db from '@/util/db';
 import { useState } from 'react';
-import Button from './common/Button';
+import Button from '../common/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
-import Description from './item/Description';
-import Title from './item/Title';
+import Description from './Description';
 import ItemsList from './ItemsList';
 
-export default function Item ({ data, parentId }) {
-
+export default function Item ({ data, parentId, completed }) {
   const [showForm, setShowForm] = useState(false);
-
+  
   const fullId = (e) => parentId ? `${parentId}.${e.id}` : e.id;
+  
+  if(completed) db.setCompleted(fullId(data));
+
+  const completedCheck = completed ? completed : data.completed;
 
   if (data) return (
     <>
       {
         <div className={`${styles.item} ${data.completed && styles.completed}`} key={data.id}>
           <div className={styles.itemHeader}>
-            <Title styles={styles} item={data} fullId={fullId(data)} />
+
+            <label className={styles.checkbox}>
+              <input type="checkbox" checked={completedCheck} readOnly={true} />
+              <div className={styles.square} onClick={() => {db.toggleCompleted(fullId(data)); setShowForm(false)}} />
+              <span className={styles.title}>{data.name}</span>
+            </label>
+
             <div className={styles.buttons}>
-              <Button type="secondary" size="small" onClick={() => setShowForm(!showForm)}>
+              <Button type="secondary" size="small" onClick={() => setShowForm(!showForm)} disabled={completedCheck}>
                 {
                   !showForm ? 
                   <FontAwesomeIcon icon={faPlus} />
@@ -43,7 +51,7 @@ export default function Item ({ data, parentId }) {
             <Form connectionId={fullId(data)} connectionExists={true} base={false} className={styles.form}/>
           }
           {
-            data.items && <ItemsList data={data} parentId={fullId(data)} />
+            data.items && <ItemsList data={data} parentId={fullId(data)} completed={data.completed} />
           }
         </div>
       }

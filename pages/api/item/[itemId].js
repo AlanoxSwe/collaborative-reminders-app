@@ -17,13 +17,25 @@ export default async (req, res) => {
   
   switch (req.method) {
     case 'PUT':
-      const putUpdate = await db
-        .collection("todos")
-        .updateOne(
-          { items: { $elemMatch: { id: ids[0] } } },
-          { "$bit": { [`${queryString}completed`]: { "xor": Number(1) } } }
-        );
-      res.status(200).json(putUpdate);
+      if(req.body.set) {
+        // Set completed
+        const putUpdate = await db
+          .collection("todos")
+          .updateOne(
+            { items: { $elemMatch: { id: ids[0] } } },
+            { "$set": { [`${queryString}completed`]: Number(1) } }
+          );
+        res.status(200).json(putUpdate);
+      }else{
+        //Toggle completed
+        const putUpdate = await db
+          .collection("todos")
+          .updateOne(
+            { items: { $elemMatch: { id: ids[0] } } },
+            { "$bit": { [`${queryString}completed`]: { "xor": Number(1) } } }
+          );
+        res.status(200).json(putUpdate);
+      }
     break;
     case 'POST':
       const postUpdate = await db

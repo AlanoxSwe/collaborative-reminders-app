@@ -1,9 +1,67 @@
 .container {
   background-color: #eee;
   padding: 2rem 2rem 0 2rem;
+
+  &.afterWave {
+    background-color: #09f;
+    color: #fff;
+  }
+  
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+
+.waveContainer {
+  background: #eee;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+
+  > svg {
+    display: block;
+    transform-origin: bottom;
+    animation: animateWave 1000ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
 }
 
 .title {
   text-align: center;
+}
+
+.share {
+  text-align: center;
+  padding: 2rem 0;
+  
+  .shareTitle {
+    margin: 1rem 0;
+  }
+
+  .shareLink {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 2px #000 dashed;
+    border-radius: 5px;
+  }
+}
+
+.freeze {
+  text-align: center;
+  padding-bottom: 4rem;
+
+  .freezeForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+
+    .textField {
+      margin-right: 1rem;
+    }
+  }
 }
 

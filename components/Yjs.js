@@ -1,5 +1,3 @@
-import Axios from 'axios';
-
 import Y from 'yjs';
 import yMemory from 'y-memory';
 import yArray from 'y-array';
@@ -34,13 +32,13 @@ const Yjs = ({ connectionExists, room, textInput }) => {
         url: link, 
       },
       share: {
-        textarea: 'Text' // y.share.textarea is of type Y.Text
+        textarea: 'Text',
       }
     }).then(y => {
       y.share.textarea.bind(textInput.current);
       y.share.textarea.delete(0, y.share.textarea._content.length);
       y.db.gc = false;
-      // console.log('y is: ', y);
+      console.log('y is: ', y);
     }).catch(e => {
       console.error(e);
     });

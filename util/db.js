@@ -1,7 +1,11 @@
 import Router from 'next/router';
 import Axios from 'axios';
 
+import lscache from 'lscache';
+
 import uuid from '@/util/uuid';
+
+import bcrypt from 'bcryptjs';
 
 const getQueryFromItemId = async (query, ids) => {
   let arr = await query.items;
@@ -20,16 +24,30 @@ const toggleCompleted = async (itemId) => {
   await Axios.put(`/api/item/${itemId}`)
 }
 
-const createList = async () => {
+const setCompleted = async (itemId) => {
+  await Axios.put(`/api/item/${itemId}`, { set: true })
+}
+
+const toggleFreezeList = async (itemId) => {
+  await Axios.put(`/api/item/freeze/${itemId}`);
+}
+
+const createList = async (name, password) => {
+  const hashedPassword = password ? bcrypt.hashSync(password, 8) : null;
   const id = uuid.generate();
   await Axios.post('/api/todo', {
     id: id[0],
-    name: 'Todo List',
+    name,
+    password: hashedPassword,
+    active: Number(1),
     shortId: id[1],
     items: [],
   }); 
+  lscache.set('savedTodo', id[0]);
   Router.push(`/list/${id[0]}`);
 };
+
+
 
 const addBaseItem = async (todoId, titleRef, descRef) => {
   if(titleRef.current.value) {
@@ -68,5 +86,7 @@ export default {
   addBaseItem,
   addItem,
   toggleCompleted,
-  deleteItem
+  setCompleted,
+  deleteItem,
+  toggleFreezeList
 }
