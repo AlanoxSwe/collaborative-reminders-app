@@ -1,14 +1,14 @@
-import Form from '@/containers/Form';
-import styles from '@/styles/items.module.scss';
-import db from '@/util/db';
+//Dependencies
 import { useState } from 'react';
-import Button from '../common/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
-
-
+//Utils
+import db from '@/util/db';
+//Components
+import Form from '@/containers/Form';
+import Actions from './Actions';
 import Description from './Description';
 import ItemsList from './ItemsList';
+//Styles
+import styles from '@/styles/items.module.scss';
 
 export default function Item ({ data, parentId, completed }) {
   const [showForm, setShowForm] = useState(false);
@@ -24,28 +24,14 @@ export default function Item ({ data, parentId, completed }) {
       {
         <div className={`${styles.item} ${data.completed && styles.completed}`} key={data.id}>
           <div className={styles.itemHeader}>
-
             <label className={styles.checkbox}>
               <input type="checkbox" checked={completedCheck} readOnly={true} />
               <div className={styles.square} onClick={() => {db.toggleCompleted(fullId(data)); setShowForm(false)}} />
               <span className={styles.title}>{data.name}</span>
             </label>
-
-            <div className={styles.buttons}>
-              <Button type="secondary" size="small" onClick={() => setShowForm(!showForm)} disabled={completedCheck}>
-                {
-                  !showForm ? 
-                  <FontAwesomeIcon icon={faPlus} />
-                  : <FontAwesomeIcon icon={faTimes} />
-
-                }
-              </Button>
-              <Button type="danger" size="small" onClick={() => db.deleteItem(fullId(data))}>
-                <FontAwesomeIcon icon={faTrash} />
-              </Button>
-            </div>
+            <Actions styles={styles} showForm={showForm} setShowForm={setShowForm} completedCheck={completedCheck} data={data} fullId={fullId(data)} />
           </div>
-          <Description styles={styles} desc={data.desc} />
+          <Description styles={styles} data={data} />
           {
             showForm &&
             <Form connectionId={fullId(data)} connectionExists={true} base={false} className={styles.form}/>

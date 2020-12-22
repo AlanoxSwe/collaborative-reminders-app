@@ -34,6 +34,11 @@
     background-color: #09f;
     color: #fff;
   }
+  &.link {
+    background-color: #ddd;
+    color: #222;
+    box-shadow: none;
+  }
   &.danger {
     background-color: #cf000f;
     color: #fff;

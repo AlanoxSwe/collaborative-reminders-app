@@ -10,7 +10,8 @@
   margin: 0.5rem 0;
   padding: 1rem;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  
+  text-align: left;
+
   .item {
     border: 2px #eee solid;
     box-shadow: none;
@@ -33,9 +34,22 @@
   }
 
   .desc {
-    text-align: left;
     padding-top: 1rem;
     margin-left: 1rem;
+  }
+  
+  .extras {
+    display: inline-block;
+    justify-self: start;
+    margin: 0.5rem 0rem 0.5rem 1rem;
+    background-color: #ddd;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+
+    .extrasText {
+      padding: 0 1rem;
+    }
   }
 
   &.completed {

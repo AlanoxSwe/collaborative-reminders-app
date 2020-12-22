@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
 import Yjs from "@/components/Yjs";
+import TextField from '@/components/common/TextField';
+import TextareaField from '@/components/common/TextareaField';
 
 
-const TodoContainer = React.forwardRef(({ type, connectionExists, room, ...props }, textInput) => {
+const TodoContainer = React.forwardRef(({ type, connectionExists, room, placeholder, ...props }, textInput) => {
   const [inputArea, setInputArea] = useState(null);
 
   useEffect(() => {
     if(type === 'text') {
       setInputArea(
         <>
-          <input type="text"
+          <TextField 
+            type="text"
             id={room}
-            placeholder="Title..."
+            placeholder={placeholder}
             ref={textInput}
             {...props}
           />
@@ -27,9 +30,9 @@ const TodoContainer = React.forwardRef(({ type, connectionExists, room, ...props
     else {
       setInputArea(
         <>
-          <textarea
+          <TextareaField
             id={room}
-            placeholder="Description..."
+            placeholder={placeholder}
             ref={textInput}
             {...props}
           />

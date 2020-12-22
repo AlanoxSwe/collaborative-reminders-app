@@ -49,12 +49,15 @@ const createList = async (name, password) => {
 
 
 
-const addBaseItem = async (todoId, titleRef, descRef) => {
+const addBaseItem = async (todoId, titleRef, descRef, carbRef, fatRef, proteinRef) => {
   if(titleRef.current.value) {
     await Axios.post(`/api/item/base/${todoId}`, {
       id: uuid.generate()[1],
       name: titleRef.current.value,
-      desc: descRef ? descRef.current.value : null,
+      desc: descRef.current.value.length ? descRef.current.value : null,
+      carbs: carbRef.current.value.length ? carbRef.current.value : null,
+      fat: fatRef.current.value.length ? fatRef.current.value : null,
+      protein: proteinRef.current.value.length ? proteinRef.current.value : null,
       baseParent: true,
       completed: Number(0),
       items: [],
@@ -62,12 +65,15 @@ const addBaseItem = async (todoId, titleRef, descRef) => {
   }
 }
 
-const addItem = async (itemId, titleRef, descRef) => {
+const addItem = async (itemId, titleRef, descRef, carbRef, fatRef, proteinRef) => {
   if(titleRef.current.value) {
     await Axios.post(`/api/item/${itemId}`, {
       id: uuid.generate()[1],
       name: titleRef.current.value,
-      desc: descRef ? descRef.current.value : null,
+      desc: descRef.current.value.length ? descRef.current.value : null,
+      carbs: carbRef.current.value.length ? carbRef.current.value : null,
+      fat: fatRef.current.value.length ? fatRef.current.value : null,
+      protein: proteinRef.current.value.length ? proteinRef.current.value : null,
       baseParent: false,
       completed: Number(0),
       items: [],

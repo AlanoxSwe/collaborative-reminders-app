@@ -43,7 +43,6 @@ export default function Home() {
       <main className={styles.waveContainer}>
         <div className={styles.container}>
           <h1 className={styles.title}>Welcome to uitodo</h1>
-          {/* <Button type="primary" onClick={db.createList}>Create To-Do List</Button> */}
           <Button type="primary" onClick={openModal}>Create To-Do List</Button>
         </div>
         <Wave color="#fff" />

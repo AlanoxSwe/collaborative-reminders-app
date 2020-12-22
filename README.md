@@ -16,6 +16,7 @@ UI Full-Stack home assignment - “Reminders App”
 *  I as a user can keep editing the list even when I lose internet connection, and can expect it to sync up with BE as I regain connection
 *  I as a user can be sure that my todos will be persisted so that important information is not lost when server restarts
 *  I as an owner/creator of a certain to-do list can freeze/unfreeze a to-do list I've created to avoid other users from mutating it
+*  In addition to regular to-do tasks, I as a user can add “special” typed to-do items, that will have custom style and some required (<-- optional) fields. (Food)
 
 ##### Custom Stories
 *  I as a user can see the latest to-do list and access it from the index page

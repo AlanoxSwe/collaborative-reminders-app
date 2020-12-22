@@ -30,7 +30,7 @@ export default function Freeze ({ styles, data }) {
       {showError && <h1>Wrong password</h1>}
       <h2>List availability</h2>
       <form className={styles.freezeForm}>
-        <TextField type="password" className={styles.textField} placeholder="Password..." ref={password} />
+        <TextField type="password" extraClass={styles.textField} placeholder="Password..." ref={password} />
         {
           data?.active ?
           <Button type="danger" onClick={(e) => freezeList(e)}>Freeze</Button>
