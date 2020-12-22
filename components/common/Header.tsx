@@ -15,10 +15,7 @@ const Header = (): JSX.Element => {
       <div className={styles.menu}>
         <nav className={styles.nav}>
           <li className={styles.navItem}>
-            New List
-          </li>
-          <li className={styles.navItem}>
-            About
+            <Link href="/?newList=true">New List</Link>
           </li>
         </nav>
       </div>

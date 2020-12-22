@@ -1,6 +1,7 @@
 // Dependencies
 import React, { useState, useRef } from 'react';
 import Modal from 'react-modal';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 // Utils
 import db from '@/util/db';
@@ -13,8 +14,11 @@ import TextField from '@/components/common/TextField';
 import styles from '@/styles/index.module.scss';
 
 const Home = (): JSX.Element => {
-  Modal.setAppElement('#__next')
-  const [modalIsOpen, setIsOpen] = useState(false);
+  Modal.setAppElement('#__next');
+  
+  const router = useRouter();
+  const { newList }: { newList?: string } = router.query;
+  const [modalIsOpen, setIsOpen] = useState(newList ? true : false);
 
   const name = useRef<HTMLInputElement>();
   const password = useRef<HTMLInputElement>();
