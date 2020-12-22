@@ -1,10 +1,14 @@
+// Dependencies
+import React from 'react';
 import useSWR from 'swr';
-
+// Components
 import ItemsList from '@/components/item/ItemsList';
-
+// Styles
 import styles from '@/styles/items.module.scss';
 
-export default function Items ({ todoId }) {
+const Items = ({ todoId }: {
+  todoId: string,
+}): JSX.Element => {
   const { data } = useSWR(todoId && `/api/todo/${todoId}`);
   return (
     <>
@@ -17,3 +21,5 @@ export default function Items ({ todoId }) {
     </>
   );
 }
+
+export default Items;

@@ -1,29 +1,21 @@
 // Dependencies
 import React from 'react';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { SWRConfig } from "swr";
 import Axios from 'axios';
-//Styles
+// Context
+import { ConnectionProvider } from '@/context/Connection';
+// Styles
 import '@/styles/base.scss';
 
-import { ConnectionProvider } from '@/context/Connection';
-
-
-
-function MyApp({ Component, pageProps }) {
-
-  const [connectionExists, setConnectionExists] = React.useState(true);
-
-  function toggleConnection() {
-    setConnectionExists(connectionExists => !connectionExists);
-  }
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
-    <ConnectionProvider value={{connectionExists, toggleConnection}}>
+    <ConnectionProvider value={true}>
       <SWRConfig
         value={{
-          revalidateOnFocus: false,
           shouldRetryOnError: false,
-          fetcher: (...args) => Axios(...args).then((res) => res.data),
+          fetcher: (resource, init) => Axios(resource, init).then((res) => res.data),
           revalidateOnFocus: true,
           refreshInterval: 500,
         }}

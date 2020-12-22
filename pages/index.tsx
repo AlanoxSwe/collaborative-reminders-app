@@ -1,36 +1,38 @@
-import Head from 'next/head';
-
-import { useState, useRef, useContext } from 'react';
+// Dependencies
+import React, { useState, useRef } from 'react';
 import Modal from 'react-modal';
-
+import Head from 'next/head';
+// Utils
 import db from '@/util/db';
-
-import styles from '@/styles/index.module.scss';
+// Components
 import Wave from '@/components/common/Wave';
 import Button from '@/components/common/Button';
-
 import LatestTodo from '@/components/index/LatestTodo';
 import TextField from '@/components/common/TextField';
+// Styles
+import styles from '@/styles/index.module.scss';
 
-export default function Home() {
+const Home = (): JSX.Element => {
   Modal.setAppElement('#__next')
-  const [modalIsOpen,setIsOpen] = useState(false);
-  function openModal() {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const name = useRef<HTMLInputElement>();
+  const password = useRef<HTMLInputElement>();
+  
+  function openModal(): void {
     setIsOpen(true);
   }
-  function closeModal(){
+
+  function closeModal(): void {
     setIsOpen(false);
   }
 
-  function createList(e) {
+  function createList(e): void {
     e.preventDefault();
     if (name.current.value) {
       db.createList(name.current.value, password.current.value);
     }
   }
-  
-  const name = useRef();
-  const password = useRef();
 
   return (
     <div>
@@ -65,3 +67,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home;

@@ -1,12 +1,12 @@
 import { connectToDatabase } from "@/util/mongodb";
+import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const { db } = await connectToDatabase();
-  const { todoId } = req.query;
-
+  const { todoId }: { todoId?: string } = req.query;
   switch (req.method) {
     case 'PUT':
-      const query = await db
+      const query: any = await db
         .collection("todos")
         .updateOne(
           { id: todoId },

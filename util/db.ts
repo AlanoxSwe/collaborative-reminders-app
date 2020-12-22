@@ -1,17 +1,16 @@
+// Dependencies
 import Router from 'next/router';
 import Axios from 'axios';
-
 import lscache from 'lscache';
-
+import bcrypt from 'bcryptjs';
+// Utlis
 import uuid from '@/util/uuid';
 
-import bcrypt from 'bcryptjs';
-
-const getQueryFromItemId = async (query, ids) => {
+const getQueryFromItemId = async (query: any, ids: string[]): Promise<string> => {
   let arr = await query.items;
   let str = '';
   for (let i = 0; i < ids.length; i++) {
-    let result = arr.find((e, index) => {
+    const result = arr.find((e, index) => {
       if(e.id === ids[i]) str += `items.${index}.`;
       return e.id === ids[i];
     });
@@ -20,21 +19,21 @@ const getQueryFromItemId = async (query, ids) => {
   return str;
 }
 
-const toggleCompleted = async (itemId) => {
+const toggleCompleted = async (itemId: string): Promise<void> => {
   await Axios.put(`/api/item/${itemId}`)
 }
 
-const setCompleted = async (itemId) => {
+const setCompleted = async (itemId: string): Promise<void> => {
   await Axios.put(`/api/item/${itemId}`, { set: true })
 }
 
-const toggleFreezeList = async (itemId) => {
+const toggleFreezeList = async (itemId: string): Promise<void> => {
   await Axios.put(`/api/item/freeze/${itemId}`);
 }
 
-const createList = async (name, password) => {
-  const hashedPassword = password ? bcrypt.hashSync(password, 8) : null;
-  const id = uuid.generate();
+const createList = async (name: string, password: string): Promise<void> => {
+  const hashedPassword: string | null = password ? bcrypt.hashSync(password, 8) : null;
+  const id: string[] = uuid.generate();
   await Axios.post('/api/todo', {
     id: id[0],
     name,
@@ -47,9 +46,7 @@ const createList = async (name, password) => {
   Router.push(`/list/${id[0]}`);
 };
 
-
-
-const addBaseItem = async (todoId, titleRef, descRef, carbRef, fatRef, proteinRef) => {
+const addBaseItem = async (todoId: string, titleRef, descRef, carbRef, fatRef, proteinRef): Promise<void> => {
   if(titleRef.current.value) {
     await Axios.post(`/api/item/base/${todoId}`, {
       id: uuid.generate()[1],
@@ -65,7 +62,7 @@ const addBaseItem = async (todoId, titleRef, descRef, carbRef, fatRef, proteinRe
   }
 }
 
-const addItem = async (itemId, titleRef, descRef, carbRef, fatRef, proteinRef) => {
+const addItem = async (itemId: string, titleRef, descRef, carbRef, fatRef, proteinRef): Promise<void> => {
   if(titleRef.current.value) {
     await Axios.post(`/api/item/${itemId}`, {
       id: uuid.generate()[1],
@@ -81,10 +78,9 @@ const addItem = async (itemId, titleRef, descRef, carbRef, fatRef, proteinRef) =
   }
 }
 
-const deleteItem = async (itemId) => {
+const deleteItem = async (itemId: string): Promise<void> => {
   await Axios.delete(`/api/item/${itemId}`)
 }
-
 
 export default {
   getQueryFromItemId,

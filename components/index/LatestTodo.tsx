@@ -1,14 +1,16 @@
+// Dependencies
+import React from 'react';
 import useSWR from 'swr';
 import lscache from 'lscache';
-
 import Link from 'next/link';
-import Button from '@/components/common/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
+// Components
+import Button from '@/components/common/Button';
+// Styles
 import styles from '@/styles/index.module.scss';
 
-export default function LatestTodo () {
+const LatestTodo = (): JSX.Element => {
   const latestTodo = lscache.get('savedTodo');
   const { data } = useSWR(latestTodo && `/api/todo/${latestTodo}`, { refreshInterval: 0 });
 
@@ -32,3 +34,5 @@ export default function LatestTodo () {
     </div>
   );
 }
+
+export default LatestTodo;

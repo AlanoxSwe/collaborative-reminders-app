@@ -1,7 +1,15 @@
-
+// Dependencies
+import React from 'react';
+// Components
 import Item from '@/components/item/Item';
 
-export default function ItemsList ({ data, parentId, hasParent, completed, done }) {
+const ItemsList = ({ data, parentId, hasParent, completed, done }: {
+  data: any,
+  parentId?: string,
+  hasParent?: boolean,
+  completed?: boolean,
+  done?: boolean,
+}): JSX.Element => {
 
   const query = (e) => done ? e.completed : ((e.baseParent && !e.completed) || hasParent);
 
@@ -18,3 +26,5 @@ export default function ItemsList ({ data, parentId, hasParent, completed, done 
     </>
   );
 }
+
+export default ItemsList;

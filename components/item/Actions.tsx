@@ -1,4 +1,5 @@
 //Dependencies
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 //Utils
@@ -7,7 +8,13 @@ import db from '@/util/db';
 import Button from '@/components/common/Button';
 
 
-export default function Actions ({ styles, showForm, setShowForm, completedCheck, data, fullId }) {
+const Actions = ({ styles, showForm, setShowForm, completedCheck, fullId }: {
+  styles: { [key: string]: string },
+  showForm: boolean,
+  setShowForm: (boolean) => void,
+  completedCheck: boolean,
+  fullId: string,
+}): JSX.Element => {
 
   return (
     <div className={styles.buttons}>
@@ -25,3 +32,5 @@ export default function Actions ({ styles, showForm, setShowForm, completedCheck
     </div>
   );
 }
+
+export default Actions;

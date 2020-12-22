@@ -1,16 +1,19 @@
-import Button from '@/components/common/Button';
+// Dependencies
+import React, { useState, useRef } from 'react';
 import bcrypt from 'bcryptjs';
-import TextField from '../common/TextField';
-
+// Utils
 import db from '@/util/db';
+// Components
+import Button from '@/components/common/Button';
+import TextField from '@/components/common/TextField';
 
-import { useState, useRef } from 'react';
-
-export default function Freeze ({ styles, data }) {
+const Freeze = ({ styles, data }: {
+  styles: { [key: string]: string },
+  data: any
+}): JSX.Element => {
   const [showError, setShowError] = useState(false);
-  const password = useRef();
+  const password = useRef<HTMLInputElement>(null);
 
-  
   const freezeList = e => {
     e.preventDefault();
     if(data && password.current.value) {
@@ -25,12 +28,11 @@ export default function Freeze ({ styles, data }) {
   }
 
   return (
-    
     <div className={styles.freeze}>
       {showError && <h1>Wrong password</h1>}
       <h2>List availability</h2>
       <form className={styles.freezeForm}>
-        <TextField type="password" extraClass={styles.textField} placeholder="Password..." ref={password} />
+        <TextField type="password" extraClass={styles.textField} text="Password..." ref={password} />
         {
           data?.active ?
           <Button type="danger" onClick={(e) => freezeList(e)}>Freeze</Button>
@@ -40,3 +42,5 @@ export default function Freeze ({ styles, data }) {
     </div>
   );
 }
+
+export default Freeze;

@@ -1,14 +1,15 @@
+// Dependencies
+import React from 'react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-
+// Utils
 import uuid from '@/util/uuid';
 
 const longIdRegex = /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/;
 const shortIdRegex = /^[a-zA-Z0-9\-]{22}$/;
 
-export default function ShortenedUrl () {
+const ShortenedUrl = (): JSX.Element => {
   const router = useRouter();
-  const { shortenedUrl } = router.query;
+  const { shortenedUrl }: { shortenedUrl?: string } = router.query;
   
   if(typeof window !== 'undefined' && shortenedUrl) {
     if (longIdRegex.test(shortenedUrl)) {
@@ -24,3 +25,5 @@ export default function ShortenedUrl () {
 
   return <div>Redirecting...</div>;
 }
+
+export default ShortenedUrl;

@@ -1,7 +1,10 @@
+// Dependencies
+import React from 'react';
 import Link from 'next/link';
+// Styles
 import styles from '@/styles/header.module.scss';
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>

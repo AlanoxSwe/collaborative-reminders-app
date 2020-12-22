@@ -1,11 +1,12 @@
 import { connectToDatabase } from "@/util/mongodb";
+import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async (req, res) => {
-  const { db } = await connectToDatabase();
+export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const { db }: { db: any } = await connectToDatabase();
 
   switch (req.method) {
     case 'POST':
-      const object = req.body;
+      const object: any = req.body;
       await db
         .collection("todos")
         .insertOne(object, (err) => {

@@ -1,6 +1,11 @@
+// Dependencies
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
-export default function Description ({ styles, data }) {
+const Description = ({ styles, data }: {
+  styles: { [key: string]: string },
+  data: any,
+}): JSX.Element => {
   return (
     <>
       {
@@ -21,3 +26,5 @@ export default function Description ({ styles, data }) {
     </>
   );
 }
+
+export default Description;

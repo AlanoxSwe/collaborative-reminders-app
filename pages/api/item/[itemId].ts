@@ -1,34 +1,36 @@
 import { connectToDatabase } from "@/util/mongodb";
+import { NextApiRequest, NextApiResponse } from 'next'
 import util from '@/util/db';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const { db } = await connectToDatabase();
-  const { itemId } = req.query;
-  
+  const { itemId }: { itemId?: string } = req.query;
   const object = req.body;
+  const ids: string[] = itemId.split(".");
   
-  const ids = itemId.split(".");
   const query = await db
     .collection("todos")
     .findOne(
       { items: { $elemMatch: { id: ids[0] } } }
     );
-  const queryString = await util.getQueryFromItemId(query, ids);
+
+  const queryString: string = await util.getQueryFromItemId(query, ids);
   
   switch (req.method) {
     case 'PUT':
       if(req.body.set) {
         // Set completed
-        const putUpdate = await db
+        const putUpdate: any = await db
           .collection("todos")
           .updateOne(
             { items: { $elemMatch: { id: ids[0] } } },
             { "$set": { [`${queryString}completed`]: Number(1) } }
           );
         res.status(200).json(putUpdate);
-      }else{
+      }
+      else {
         //Toggle completed
-        const putUpdate = await db
+        const putUpdate: any = await db
           .collection("todos")
           .updateOne(
             { items: { $elemMatch: { id: ids[0] } } },
@@ -38,7 +40,7 @@ export default async (req, res) => {
       }
     break;
     case 'POST':
-      const postUpdate = await db
+      const postUpdate: any = await db
         .collection("todos")
         .updateOne(
           { items: { $elemMatch: { id: ids[0] } } },
@@ -47,7 +49,7 @@ export default async (req, res) => {
       res.status(201).json(postUpdate);
     break;
     case 'DELETE':
-      const deleteUpdate = await db
+      const deleteUpdate: any = await db
         .collection("todos")
         .updateOne(
           { items: { $elemMatch: { id: ids[0] } } },

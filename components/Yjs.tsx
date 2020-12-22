@@ -6,14 +6,17 @@ import yWebsocketsClient from 'y-websockets-client';
 
 Y.extend(yArray, yWebsocketsClient, yMemory, yArray, yText);
 
-var io = Y['websockets-client'].io;
+const io = Y['websockets-client'].io;
 // var link = 'http://localhost:1234';
-var link = 'http://192.168.50.24:1234';
+const link = 'http://192.168.50.24:1234';
 
-var connection = io(link);
+const connection = io(link);
 
-const Yjs = ({ connectionExists, room, textInput }) => {
-
+const Yjs = ({ connectionExists, room, textInput }: {
+  connectionExists: boolean,
+  room: string,
+  textInput: any,
+}): JSX.Element => {
 
   if (!connectionExists) {
     connection.disconnect();
@@ -41,7 +44,6 @@ const Yjs = ({ connectionExists, room, textInput }) => {
       console.error(e);
     });
   }
-
   return null;
 };
 

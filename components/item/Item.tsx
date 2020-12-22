@@ -1,19 +1,22 @@
-//Dependencies
-import { useState, useContext } from 'react';
-//Utils
+// Dependencies
+import React, { useState } from 'react';
+// Utils
 import db from '@/util/db';
-//Components
+// Components
 import Form from '@/containers/Form';
 import Actions from './Actions';
 import Description from './Description';
 import ItemsList from './ItemsList';
-//Styles
+// Styles
 import styles from '@/styles/items.module.scss';
-import ConnectionContext from '@/context/Connection';
 
-export default function Item ({ data, parentId, hasParent, completed }) {
+const Item = ({ data, parentId, completed }: {
+  data: any,
+  parentId?: string,
+  hasParent?: boolean,
+  completed?: boolean, 
+}): JSX.Element => {
   const [showForm, setShowForm] = useState(false);
-  const connectionExists = useContext(ConnectionContext);
   
   const fullId = (e) => parentId ? `${parentId}.${e.id}` : e.id;
   
@@ -31,12 +34,12 @@ export default function Item ({ data, parentId, hasParent, completed }) {
               <div className={styles.square} onClick={() => {db.toggleCompleted(fullId(data)); setShowForm(false)}} />
               <span className={styles.title}>{data.name}</span>
             </label>
-            <Actions styles={styles} showForm={showForm} setShowForm={setShowForm} completedCheck={completedCheck} data={data} fullId={fullId(data)} />
+            <Actions styles={styles} showForm={showForm} setShowForm={setShowForm} completedCheck={completedCheck} fullId={fullId(data)} />
           </div>
           <Description styles={styles} data={data} />
           {
             showForm &&
-            <Form connectionId={fullId(data)} connectionExists={connectionExists} base={false} className={styles.form}/>
+            <Form connectionId={fullId(data)} base={false} setShowForm={setShowForm} className={styles.form}/>
           }
           {
             data.items && <ItemsList data={data} hasParent={true} parentId={fullId(data)} completed={data.completed} />
@@ -47,3 +50,5 @@ export default function Item ({ data, parentId, hasParent, completed }) {
   );
   return null;
 }
+
+export default Item;
