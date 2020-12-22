@@ -7,8 +7,7 @@ import yWebsocketsClient from 'y-websockets-client';
 Y.extend(yArray, yWebsocketsClient, yMemory, yArray, yText);
 
 const io = Y['websockets-client'].io;
-// var link = 'http://localhost:1234';
-const link = 'http://192.168.50.24:1234';
+const link = 'https://pure-tor-23097.herokuapp.com/';
 
 const connection = io(link);
 
