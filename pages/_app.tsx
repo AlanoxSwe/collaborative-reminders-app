@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           shouldRetryOnError: false,
           fetcher: (resource, init) => Axios(resource, init).then((res) => res.data),
           revalidateOnFocus: true,
-          refreshInterval: 500,
+          refreshInterval: 100,
         }}
       >
         <Component {...pageProps} />
