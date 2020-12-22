@@ -13,11 +13,10 @@ var link = 'http://192.168.50.24:1234';
 var connection = io(link);
 
 const Yjs = ({ connectionExists, room, textInput }) => {
-  
+
+
   if (!connectionExists) {
-      console.log('Yjs --->> this.props.connectionExists === false');
-      connection.disconnect();
-      console.log('connection disconnected...');
+    connection.disconnect();
   }
 
   if (connectionExists) {
@@ -38,7 +37,6 @@ const Yjs = ({ connectionExists, room, textInput }) => {
       y.share.textarea.bind(textInput.current);
       y.share.textarea.delete(0, y.share.textarea._content.length);
       y.db.gc = false;
-      console.log('y is: ', y);
     }).catch(e => {
       console.error(e);
     });

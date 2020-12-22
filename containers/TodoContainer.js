@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import Yjs from "@/components/Yjs";
 import TextField from '@/components/common/TextField';
 import TextareaField from '@/components/common/TextareaField';
 
+import ConnectionContext from '@/context/Connection';
 
-const TodoContainer = React.forwardRef(({ type, connectionExists, room, placeholder, ...props }, textInput) => {
+const TodoContainer = React.forwardRef(({ type, room, placeholder, extraClass }, textInput) => {
   const [inputArea, setInputArea] = useState(null);
+  const { connectionExists } = useContext(ConnectionContext);
 
   useEffect(() => {
     if(type === 'text') {
@@ -17,7 +19,7 @@ const TodoContainer = React.forwardRef(({ type, connectionExists, room, placehol
             id={room}
             placeholder={placeholder}
             ref={textInput}
-            {...props}
+            extraClass={extraClass}
           />
           <Yjs
             room={room}
@@ -34,7 +36,7 @@ const TodoContainer = React.forwardRef(({ type, connectionExists, room, placehol
             id={room}
             placeholder={placeholder}
             ref={textInput}
-            {...props}
+            extraClass={extraClass}
           />
           <Yjs
             room={room}

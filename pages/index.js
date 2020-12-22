@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import Modal from 'react-modal';
 
 import db from '@/util/db';
@@ -11,7 +11,6 @@ import Button from '@/components/common/Button';
 
 import LatestTodo from '@/components/index/LatestTodo';
 import TextField from '@/components/common/TextField';
-
 
 export default function Home() {
   Modal.setAppElement('#__next')

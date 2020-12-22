@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 
 import db from '@/util/db';
 
@@ -9,9 +9,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '@/styles/form.module.scss';
+import ConnectionContext from '@/context/Connection';
 
-export default function Form ({ connectionId, connectionExists, base, className }) {
+export default function Form ({ connectionId, base, className }) {
   const [showSpecial, setShowSpecial] = useState(false);
+  const { connectionExists, toggleConnection } = useContext(ConnectionContext);
+
+  // From
+  const form = useRef();
   // General
   const textInput = useRef();
   const descInput = useRef();
@@ -20,9 +25,13 @@ export default function Form ({ connectionId, connectionExists, base, className 
   const fatInput = useRef();
   const proteinInput = useRef();
   
+  const resetForm = (e) => {
+    console.log(e);
+  }
+
 
   return (
-    <form className={`${styles.form} ${className}`}>
+    <form className={`${styles.form} ${className}`} onSubmit={e => resetForm(e)}>
       <TodoContainer 
         type='text'
         ref={textInput}
@@ -67,14 +76,14 @@ export default function Form ({ connectionId, connectionExists, base, className 
       }
 
       <div className={styles.buttons}>
-        <Button type="link" className={styles.latestButton} onClick={(e) => {e.preventDefault(); setShowSpecial(!showSpecial)}}>
+        <Button type="link" className={styles.specialButton} onClick={(e) => {e.preventDefault(); setShowSpecial(!showSpecial)}}>
           <div>Special Fields</div>
           <div className={styles.icon}>
             <FontAwesomeIcon icon={showSpecial ? faChevronUp : faChevronDown} />
           </div>
         </Button>
         {
-          base ? <Button type="secondary" onClick={(e) => { e.preventDefault(); db.addBaseItem(connectionId, textInput, descInput, carbInput, fatInput, proteinInput) }}>Add</Button>
+          base ? <Button type="secondary" onClick={(e) => { e.preventDefault(); db.addBaseItem(connectionId, textInput, descInput, carbInput, fatInput, proteinInput); resetForm(); }}>Add</Button>
           : <Button type="secondary" onClick={(e) => { e.preventDefault(); db.addItem(connectionId, textInput, descInput, carbInput, fatInput, proteinInput) }}>Add</Button>
         }
       </div>

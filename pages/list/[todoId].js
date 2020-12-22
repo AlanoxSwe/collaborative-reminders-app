@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useRouter } from "next/router";
 
 import Link from 'next/link';
@@ -13,9 +13,11 @@ import uuid from '@/util/uuid';
 import Wave from '@/components/common/Wave';
 import Freeze from '@/components/item/Freeze';
 
+import ConnectionContext from '@/context/Connection';
+
 
 export default function Todo () {
-  const [connectionExists, setConnectionExists] = useState(true);
+  const connectionExists = useContext(ConnectionContext);
   const router = useRouter();
   const { todoId } = router.query;
   const { data } = useSWR(todoId && `/api/todo/${todoId}`);

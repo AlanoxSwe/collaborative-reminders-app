@@ -1,5 +1,5 @@
 //Dependencies
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 //Utils
 import db from '@/util/db';
 //Components
@@ -9,9 +9,11 @@ import Description from './Description';
 import ItemsList from './ItemsList';
 //Styles
 import styles from '@/styles/items.module.scss';
+import ConnectionContext from '@/context/Connection';
 
-export default function Item ({ data, parentId, completed }) {
+export default function Item ({ data, parentId, hasParent, completed }) {
   const [showForm, setShowForm] = useState(false);
+  const connectionExists = useContext(ConnectionContext);
   
   const fullId = (e) => parentId ? `${parentId}.${e.id}` : e.id;
   
@@ -34,10 +36,10 @@ export default function Item ({ data, parentId, completed }) {
           <Description styles={styles} data={data} />
           {
             showForm &&
-            <Form connectionId={fullId(data)} connectionExists={true} base={false} className={styles.form}/>
+            <Form connectionId={fullId(data)} connectionExists={connectionExists} base={false} className={styles.form}/>
           }
           {
-            data.items && <ItemsList data={data} parentId={fullId(data)} completed={data.completed} />
+            data.items && <ItemsList data={data} hasParent={true} parentId={fullId(data)} completed={data.completed} />
           }
         </div>
       }
