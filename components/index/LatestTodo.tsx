@@ -17,7 +17,7 @@ const LatestTodo = (): JSX.Element => {
 
   return (
     <div className={`${styles.container} ${styles.afterWave}`}>
-      <h1 className={styles.title}>Your latest todo list</h1>
+      <h2 className={styles.subTitle}>Your latest todo list</h2>
       {
         data ?
         <Link href={`/list/${latestTodo}`} passHref>
