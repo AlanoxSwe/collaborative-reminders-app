@@ -23,5 +23,4 @@ UI Full-Stack home assignment - “Reminders App”
 *  I as a user can set a password on a to-do list, to manage the accessibility of the list, as well as share the password with trusted friends
 *  I as a user can shorten the URL and share it with friends
 
-<img src="https://s2.gifyu.com/images/ezgif.com-gif-maker15fd5213cf59a524.gif" />
-![Live App](https://s2.gifyu.com/images/ezgif.com-gif-maker15fd5213cf59a524.gif)
+![](https://github.com/AlanoxSwe/collaborative-reminders-app/blob/main/preview.gif)
