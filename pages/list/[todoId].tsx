@@ -8,6 +8,7 @@ import uuid from '@/util/uuid';
 // Components
 import Items from '@/components/item/Items';
 import Header from '@/components/common/Header';
+import Error from '@/components/common/Error';
 import Button from '@/components/common/Button';
 import Form from '@/containers/Form';
 import Wave from '@/components/common/Wave';
@@ -25,6 +26,7 @@ const Todo = (): JSX.Element => {
       <Header />
       { data ? 
       <div className={styles.waveContainer}>
+        {!data?.active && <Error text="This to-do list has been inactivated by the creator" type="info" />}
         <section className={`${styles.container} ${!data?.active && styles.disabled}`}>
           <h1 className={styles.title}>{data?.name}</h1>
           {todoId && <Form connectionId={todoId} base={true} />} 

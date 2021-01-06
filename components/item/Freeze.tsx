@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import db from '@/util/db';
 // Components
 import Button from '@/components/common/Button';
+import Error from '@/components/common/Error';
 import TextField from '@/components/common/TextField';
 
 const Freeze = ({ styles, data }: {
@@ -29,16 +30,19 @@ const Freeze = ({ styles, data }: {
 
   return (
     <div className={styles.freeze}>
-      {showError && <h1>Wrong password</h1>}
       <h2>List availability</h2>
+      {showError && <Error text="Wrong password" type="danger" />}
       <form className={styles.freezeForm}>
-        <TextField type="password" extraClass={styles.textField} text="Password..." ref={password} />
+        <TextField type="password" extraClass={`${styles.textField} ${showError && styles.error}`} text="Password..." ref={password} />
         {
           data?.active ?
           <Button type="danger" onClick={(e) => freezeList(e)}>Freeze</Button>
           : <Button type="primary" onClick={(e) => freezeList(e)}>Unfreeze</Button>
         }
       </form> 
+      <p>
+        Freezing your to-do list will halt all users connected from manipulating the list.
+      </p>
     </div>
   );
 }

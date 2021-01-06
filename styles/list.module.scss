@@ -57,10 +57,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    margin: 2rem 0;
 
     .textField {
-      margin-right: 1rem;
+      margin-right: 1rem; 
+      &.error {
+        box-sizing: border-box;
+        border: 3px #cf000f solid;
+      }
     }
   }
 }
