@@ -1,10 +1,10 @@
 // Dependencies
 import Router from 'next/router';
 import Axios from 'axios';
-import lscache from 'lscache';
 import bcrypt from 'bcryptjs';
 // Utlis
 import uuid from '@/util/uuid';
+import localstorage from '@/util/localstorage';
 
 const getQueryFromItemId = async (query: any, ids: string[]): Promise<string> => {
   let arr = await query.items;
@@ -42,7 +42,7 @@ const createList = async (name: string, password: string): Promise<void> => {
     shortId: id[1],
     items: [],
   }); 
-  lscache.set('savedTodo', id[0]);
+  localstorage.addList(id[0]);
   Router.push(`/list/${id[0]}`);
 };
 
